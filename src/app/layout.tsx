@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Inter, Space_Grotesk } from "next/font/google";
+import { Be_Vietnam_Pro, Manrope } from "next/font/google";
 import type { ReactNode } from "react";
 
 import { AppProviders } from "@/providers/app-providers";
@@ -7,14 +7,16 @@ import { siteConfig } from "@/shared/config/site";
 
 import "./globals.css";
 
-const inter = Inter({
+const beVietnamPro = Be_Vietnam_Pro({
   subsets: ["latin"],
   variable: "--font-sans",
+  weight: ["400", "500", "600", "700"],
 });
 
-const spaceGrotesk = Space_Grotesk({
+const manrope = Manrope({
   subsets: ["latin"],
   variable: "--font-heading",
+  weight: ["600", "700", "800"],
 });
 
 export const metadata: Metadata = {
@@ -32,7 +34,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${inter.variable} ${spaceGrotesk.variable} bg-background text-foreground antialiased`}>
+      <body className={`${beVietnamPro.variable} ${manrope.variable} bg-background text-foreground antialiased`}>
         <AppProviders>{children}</AppProviders>
       </body>
     </html>

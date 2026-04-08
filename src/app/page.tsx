@@ -1,5 +1,5 @@
-import { HomeHero } from "@/features/home/components/home-hero";
+import { redirect } from "next/navigation";
 
 export default function HomePage() {
-  return <HomeHero />;
+  redirect("/login");
 }

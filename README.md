@@ -10,6 +10,12 @@ Base frontend setup with Next.js App Router, TypeScript, Tailwind CSS, ESLint, a
 - `npm run typecheck`
 - `npm run build`
 
+## Environment
+
+- Copy `.env.example` to `.env.local`
+- Set `NEXT_PUBLIC_API_BASE_URL` to the backend base URL
+- Set `NEXT_PUBLIC_APP_NAME` if the deployed app name differs from `MTCRMS`
+
 ## Structure
 
 - `src/app`: app router entry, layouts, global styles

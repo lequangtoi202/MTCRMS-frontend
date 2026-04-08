@@ -1,21 +1,23 @@
+import { env } from "@/shared/config/env";
+import { parseApiResponse } from "@/shared/lib/api/parse-api-response";
+
+import { createUrl } from "./create-url";
+
 type RequestOptions = RequestInit & {
   baseUrl?: string;
 };
 
 export async function httpClient<T>(path: string, options: RequestOptions = {}): Promise<T> {
-  const { baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL ?? "", headers, ...restOptions } = options;
+  const { baseUrl = env.apiBaseUrl, headers, ...restOptions } = options;
 
-  const response = await fetch(`${baseUrl}${path}`, {
+  const response = await fetch(createUrl(baseUrl, path), {
     ...restOptions,
     headers: {
+      Accept: "application/json",
       "Content-Type": "application/json",
       ...headers,
     },
   });
 
-  if (!response.ok) {
-    throw new Error(`HTTP ${response.status}: ${response.statusText}`);
-  }
-
-  return response.json() as Promise<T>;
+  return parseApiResponse<T>(response);
 }
