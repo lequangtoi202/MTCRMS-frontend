@@ -33,7 +33,7 @@ export default function RootLayout({
   children: ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="vi">
       <body className={`${beVietnamPro.variable} ${manrope.variable} bg-background text-foreground antialiased`}>
         <AppProviders>{children}</AppProviders>
       </body>

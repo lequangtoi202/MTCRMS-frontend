@@ -1,11 +1,15 @@
-function readEnv(name: string, fallback?: string) {
-  const value = process.env[name] ?? fallback;
+const PUBLIC_APP_NAME = process.env.NEXT_PUBLIC_APP_NAME;
+const PUBLIC_API_PREFIX = process.env.NEXT_PUBLIC_API_PREFIX;
+const PUBLIC_API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
 
-  if (!value) {
+function requirePublicEnv(value: string | undefined, name: string, fallback?: string) {
+  const resolvedValue = value ?? fallback;
+
+  if (!resolvedValue) {
     throw new Error(`Missing required environment variable: ${name}`);
   }
 
-  return value;
+  return resolvedValue;
 }
 
 function trimSlashes(value: string) {
@@ -25,12 +29,15 @@ function normalizeApiBaseUrl(rawBaseUrl: string, apiPrefix: string) {
 
 export const env = {
   get appName() {
-    return process.env.NEXT_PUBLIC_APP_NAME || "MTCRMS";
+    return PUBLIC_APP_NAME || "MTCRMS";
   },
   get apiPrefix() {
-    return process.env.NEXT_PUBLIC_API_PREFIX || "/api/v1";
+    return PUBLIC_API_PREFIX || "/api/v1";
   },
   get apiBaseUrl() {
-    return normalizeApiBaseUrl(readEnv("NEXT_PUBLIC_API_BASE_URL"), env.apiPrefix);
+    return normalizeApiBaseUrl(
+      requirePublicEnv(PUBLIC_API_BASE_URL, "NEXT_PUBLIC_API_BASE_URL"),
+      env.apiPrefix,
+    );
   },
 } as const;

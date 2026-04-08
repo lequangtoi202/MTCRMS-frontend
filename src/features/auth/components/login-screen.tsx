@@ -4,22 +4,23 @@ import { useSearchParams } from "next/navigation";
 
 import { getLoginReasonCopy } from "../lib/login-reason";
 
+import { AuthIcon } from "./auth-icon";
 import { LoginForm } from "./login-form";
 
 const supportItems = [
   {
-    icon: "verified_user",
-    iconClassName: "text-[#00488d]",
-    text: "Vui lòng đổi mật khẩu định kỳ để đảm bảo bảo mật.",
+    icon: "verified" as const,
+    iconClassName: "text-primary",
+    text: "Vui lòng đổi mật khẩu định kỳ để đảm bảo an toàn thông tin.",
   },
   {
-    icon: "admin_panel_settings",
-    iconClassName: "text-[#00488d]",
-    text: "Liên hệ quản trị viên đơn vị để được cấp lại mật khẩu.",
+    icon: "admin" as const,
+    iconClassName: "text-primary",
+    text: "Liên hệ quản trị viên đơn vị nếu cần cấp lại mật khẩu hoặc mở khóa tài khoản.",
   },
   {
-    icon: "timer",
-    iconClassName: "text-[#930039]",
+    icon: "timer" as const,
+    iconClassName: "text-tertiary",
     text: "Hệ thống sẽ tự động đăng xuất sau 15 phút không hoạt động.",
   },
 ];
@@ -37,115 +38,125 @@ function ReasonBanner() {
       className={[
         "mb-6 rounded-2xl border px-4 py-3 text-sm",
         reason.tone === "danger"
-          ? "border-[#f1b7bc] bg-[#fff3f2] text-[#8f1d1d]"
-          : "border-[#c9d6ea] bg-[#f4f8ff] text-[#324657]",
+          ? "border-[rgb(255,218,214)] bg-[rgb(255,243,242)] text-[rgb(147,0,10)]"
+          : "border-[rgb(194,198,212)] bg-[rgb(241,244,250)] text-on-surface-variant",
       ].join(" ")}
     >
       <p className="font-semibold">{reason.title}</p>
-      <p className="mt-1 leading-6">{reason.description}</p>
+      <p className="mt-1 leading-relaxed">{reason.description}</p>
     </div>
   );
 }
 
 export function LoginScreen() {
   return (
-    <main className="min-h-screen bg-[#f1f4f9] px-4 py-4">
-      <div className="mx-auto flex min-h-[calc(100vh-2rem)] w-full max-w-[1100px] flex-col justify-center">
-        <section className="grid overflow-hidden rounded-[20px] border border-[#c2c6d4]/30 bg-white shadow-[0_32px_64px_rgba(0,0,0,0.08)] md:grid-cols-2">
-          <div className="relative hidden overflow-hidden bg-[#00488d] p-12 md:flex md:flex-col md:justify-between">
-            <div className="absolute inset-0 bg-[radial-gradient(circle_at_1px_1px,rgba(255,255,255,0.05)_1px,transparent_0)] bg-[length:40px_40px]" />
-            <div className="absolute -bottom-10 -left-10 h-64 w-64 rounded-full border border-white/5" />
-            <div className="absolute -bottom-20 -left-20 h-80 w-80 rounded-full border border-white/5" />
-            <div className="absolute top-1/2 right-0 h-48 w-48 translate-x-1/2 -translate-y-1/2 rounded-full bg-white/5 blur-3xl" />
-
-            <div className="relative z-10">
-              <div className="mb-10 flex items-center gap-3">
-                <div className="flex h-10 w-10 items-center justify-center rounded-lg border border-white/20 bg-white/10">
-                  <span className="material-symbols-outlined text-2xl text-white">shield_person</span>
-                </div>
-                <div className="font-heading text-2xl font-extrabold tracking-tight text-white">MTCRMS</div>
+    <div className="min-h-screen bg-background px-4 py-4 sm:px-6 sm:py-6">
+      <main className="mx-auto grid min-h-[calc(100vh-2rem)] w-full max-w-[1120px] overflow-hidden rounded-[28px] border border-outline-variant/30 bg-white shadow-[0_28px_80px_rgba(11,30,63,0.12)] lg:grid-cols-[1.02fr_1fr]">
+        <section className="military-grid relative hidden min-h-full overflow-hidden bg-primary px-10 py-12 text-white lg:flex lg:flex-col lg:justify-between xl:px-12 xl:py-14">
+          <div className="relative z-10">
+            <div className="mb-14 flex items-center gap-4">
+              <div className="flex h-14 w-14 items-center justify-center rounded-2xl border border-white/15 bg-white/8 backdrop-blur-sm">
+                <AuthIcon name="shield" className="h-[30px] w-[30px] text-white" />
               </div>
-
-              <h1 className="max-w-lg font-heading text-3xl font-extrabold leading-tight text-white">
-                Hệ thống Quản lý Huấn luyện &amp; Sẵn sàng Chiến đấu (MTCRMS)
-              </h1>
-              <div className="mb-6 mt-6 h-1 w-16 rounded-full bg-[#cadcff]" />
-              <p className="max-w-sm text-base leading-8 text-[#cadcff]/85">
-                Nền tảng kỹ thuật số chính quy phục vụ công tác điều hành, quản lý quân số và duy trì trạng thái sẵn
-                sàng chiến đấu trong toàn quân.
-              </p>
+              <div>
+                <div className="font-heading text-[30px] font-extrabold tracking-tight text-white">MTCRMS</div>
+                <p className="mt-1 text-xs font-semibold uppercase tracking-[0.28em] text-white/70">
+                  Secure Military Platform
+                </p>
+              </div>
             </div>
 
-            <div className="relative z-10 flex items-center gap-4 text-white/70">
-              <div className="flex h-10 w-10 items-center justify-center rounded-lg border border-white/10 bg-white/5">
-                <span className="material-symbols-outlined">security</span>
-              </div>
-              <p className="text-xs font-bold uppercase leading-tight tracking-[0.24em]">
-                Hệ thống bảo mật quốc gia
+            <div className="max-w-[440px]">
+              <p className="mb-5 text-sm font-semibold uppercase tracking-[0.32em] text-white/60">Cổng xác thực tập trung</p>
+              <h1 className="font-heading text-4xl font-extrabold leading-[1.12] tracking-tight text-white xl:text-[52px]">
+                Hệ thống Quản lý Huấn luyện
                 <br />
-                Dành cho quân nhân
+                và Sẵn sàng Chiến đấu
+              </h1>
+              <div className="my-8 h-1 w-18 rounded-full bg-on-primary-container" />
+              <p className="max-w-[390px] text-base leading-8 text-on-primary-container/88">
+                Nền tảng kỹ thuật số phục vụ công tác điều hành, quản lý quân số và duy trì trạng thái sẵn sàng chiến đấu
+                trong toàn quân.
               </p>
             </div>
           </div>
 
-          <div className="flex flex-col justify-center bg-white px-8 py-10 md:px-14">
-            <div className="mx-auto w-full max-w-sm">
-              <header className="mb-10 text-center md:text-left">
-                <div className="mb-6 flex justify-center md:hidden">
-                  <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-[#00488d]">
-                    <span className="material-symbols-outlined text-white">shield_person</span>
-                  </div>
-                </div>
-                <h2 className="font-heading text-2xl font-extrabold text-[#181c20]">Đăng nhập tài khoản</h2>
-                <p className="mt-2 text-sm font-medium text-[#424752]">Vui lòng xác thực định danh quân nhân</p>
-              </header>
-
-              <ReasonBanner />
-              <LoginForm />
-
-              <div className="mt-8 space-y-3 border-t border-[#c2c6d4]/30 pt-6">
-                {supportItems.map((item) => (
-                  <div key={item.text} className="flex items-start gap-3">
-                    <span className={`material-symbols-outlined text-[18px] ${item.iconClassName}`}>{item.icon}</span>
-                    <p className="text-xs leading-6 text-[#424752]">{item.text}</p>
-                  </div>
-                ))}
-              </div>
-
-              <footer className="mt-10 flex flex-wrap justify-center gap-x-6 gap-y-2 md:justify-start">
-                <a
-                  className="text-[10px] font-bold uppercase tracking-[0.22em] text-[#486176] transition-colors hover:text-[#00488d]"
-                  href="#"
-                >
-                  Quy định bảo mật
-                </a>
-                <a
-                  className="text-[10px] font-bold uppercase tracking-[0.22em] text-[#486176] transition-colors hover:text-[#00488d]"
-                  href="#"
-                >
-                  Hỗ trợ kỹ thuật
-                </a>
-              </footer>
+          <div className="relative z-10 flex items-end gap-4">
+            <div className="flex h-12 w-12 items-center justify-center rounded-2xl border border-white/12 bg-white/8">
+              <AuthIcon name="security" className="h-6 w-6 text-white/90" />
+            </div>
+            <div className="text-xs font-bold uppercase leading-relaxed tracking-[0.22em] text-white/72">
+              Hệ thống bảo mật quốc gia
+              <br />
+              Dành cho quân nhân
             </div>
           </div>
+
+          <div className="absolute -bottom-24 -left-24 h-72 w-72 rounded-full border border-white/8" />
+          <div className="absolute -bottom-10 -left-10 h-52 w-52 rounded-full border border-white/6" />
+          <div className="absolute top-20 right-[-90px] h-72 w-72 rounded-full bg-[#2f7dd1]/18 blur-3xl" />
         </section>
 
-        <footer className="mt-8 flex flex-col items-center justify-between gap-4 px-4 md:flex-row">
-          <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-[#424752]/60">
-            © 2024 MTCRMS - Cục Quân Lực / Bộ Tổng Tham Mưu
-          </p>
-          <div className="flex items-center gap-6">
-            <div className="flex items-center gap-1.5">
-              <div className="h-1.5 w-1.5 animate-pulse rounded-full bg-green-600" />
-              <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-[#424752]/60">
-                Kênh truyền dẫn an toàn
-              </span>
+        <section className="flex min-h-full flex-col justify-center bg-white px-6 py-10 sm:px-8 md:px-12 md:py-12 lg:px-14 xl:px-16">
+          <div className="mx-auto w-full max-w-[420px]">
+            <header className="mb-10">
+              <div className="mb-6 flex items-center gap-4 lg:hidden">
+                <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-primary shadow-[0_12px_24px_rgba(0,72,141,0.18)]">
+                  <AuthIcon name="shield" className="h-[26px] w-[26px] text-white" />
+                </div>
+                <div>
+                  <div className="font-heading text-2xl font-extrabold tracking-tight text-primary">MTCRMS</div>
+                  <p className="text-xs font-semibold uppercase tracking-[0.22em] text-secondary/80">Xác thực quân nhân</p>
+                </div>
+              </div>
+
+              <h2 className="font-heading text-3xl font-extrabold tracking-tight text-on-surface md:text-[40px]">Đăng nhập tài khoản</h2>
+              <p className="mt-3 text-[15px] leading-7 text-on-surface-variant">Vui lòng xác thực định danh quân nhân để truy cập hệ thống.</p>
+            </header>
+
+            <ReasonBanner />
+            <LoginForm />
+
+            <div className="mt-8 space-y-4 border-t border-outline-variant/30 pt-6">
+              {supportItems.map((item) => (
+                <div key={item.text} className="grid grid-cols-[20px_1fr] items-start gap-3">
+                  <AuthIcon name={item.icon} className={`mt-0.5 h-[18px] w-[18px] ${item.iconClassName}`} />
+                  <p className="text-sm leading-6 text-on-surface-variant">{item.text}</p>
+                </div>
+              ))}
             </div>
-            <div className="h-3 w-px bg-[#c2c6d4]" />
-            <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-[#424752]/60">Phiên bản 2.4.0</span>
+
+            <footer className="mt-10 flex flex-wrap gap-x-6 gap-y-3">
+              <a
+                className="text-[11px] font-bold uppercase tracking-[0.2em] text-secondary transition-colors hover:text-primary"
+                href="#"
+              >
+                Quy định bảo mật
+              </a>
+              <a
+                className="text-[11px] font-bold uppercase tracking-[0.2em] text-secondary transition-colors hover:text-primary"
+                href="#"
+              >
+                Hỗ trợ kỹ thuật
+              </a>
+            </footer>
           </div>
-        </footer>
-      </div>
-    </main>
+        </section>
+      </main>
+
+      <footer className="mx-auto mt-6 flex w-full max-w-[1120px] flex-col gap-3 px-2 text-center sm:px-0 lg:flex-row lg:items-center lg:justify-between lg:text-left">
+        <div className="text-[10px] font-bold uppercase tracking-[0.2em] text-on-surface-variant/60">
+          © 2024 MTCRMS - Cục Quân lực / Bộ Tổng Tham mưu
+        </div>
+        <div className="flex items-center justify-center gap-4 text-[10px] font-bold uppercase tracking-[0.18em] text-on-surface-variant/60 lg:justify-end">
+          <div className="flex items-center gap-1.5">
+            <div className="h-1.5 w-1.5 animate-pulse rounded-full bg-green-600" />
+            <span>Kênh truyền dẫn an toàn</span>
+          </div>
+          <div className="h-3 w-px bg-outline-variant" />
+          <span>Phiên bản 2.4.0</span>
+        </div>
+      </footer>
+    </div>
   );
 }

@@ -28,7 +28,7 @@ const reasonCopy: Record<LoginReason, { title: string; description: string; tone
   },
   "session-expired": {
     title: "Phiên làm việc đã hết hạn",
-    description: "Hệ thống tự đăng xuất sau 15 phút không hoạt động. Vui lòng xác thực lại để tiếp tục.",
+    description: "Hệ thống tự động đăng xuất sau 15 phút không hoạt động. Vui lòng xác thực lại để tiếp tục.",
     tone: "info",
   },
 };

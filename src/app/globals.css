@@ -2,21 +2,30 @@
 @import "tailwindcss";
 
 :root {
-  --background: #f5f7fb;
-  --foreground: #14213d;
+  --background: #f1f4f9;
+  --foreground: #181c20;
   --surface: #ffffff;
-  --surface-strong: #eef3ff;
-  --primary: #0f62fe;
+  --surface-strong: #ebeef4;
+  --primary: #00488d;
   --primary-foreground: #ffffff;
-  --secondary: #d9e5ff;
-  --secondary-foreground: #163675;
-  --border: #d6dfef;
-  --muted: #e8edf7;
-  --muted-foreground: #5b6785;
+  --secondary: #486176;
+  --secondary-foreground: #ffffff;
+  --border: #c2c6d4;
+  --muted: #dfe3e8;
+  --muted-foreground: #424752;
   --success: #1d9a6c;
   --warning: #cc8b00;
-  --danger: #c63c51;
-  --ring: rgba(15, 98, 254, 0.3);
+  --danger: #ba1a1a;
+  --ring: rgba(0, 72, 141, 0.1);
+  --surface-container-low: #f1f4fa;
+  --outline: #727783;
+  --outline-variant: #c2c6d4;
+  --on-primary-container: #cadcff;
+  --tertiary: #930039;
+  --on-surface: #181c20;
+  --on-surface-variant: #424752;
+  --error-container: #ffdad6;
+  --on-error-container: #93000a;
 }
 
 @theme inline {
@@ -35,6 +44,15 @@
   --color-warning: var(--warning);
   --color-danger: var(--danger);
   --color-ring: var(--ring);
+  --color-surface-container-low: var(--surface-container-low);
+  --color-outline: var(--outline);
+  --color-outline-variant: var(--outline-variant);
+  --color-on-primary-container: var(--on-primary-container);
+  --color-tertiary: var(--tertiary);
+  --color-on-surface: var(--on-surface);
+  --color-on-surface-variant: var(--on-surface-variant);
+  --color-error-container: var(--error-container);
+  --color-on-error-container: var(--on-error-container);
   --font-sans: var(--font-sans);
   --font-heading: var(--font-heading);
 }
@@ -50,9 +68,7 @@ html {
 body {
   margin: 0;
   min-height: 100vh;
-  background:
-    radial-gradient(circle at top left, rgba(15, 98, 254, 0.08), transparent 28%),
-    linear-gradient(180deg, #ffffff 0%, #f5f7fb 100%);
+  background: var(--background);
   color: var(--foreground);
   font-family: var(--font-sans), sans-serif;
 }
@@ -70,12 +86,34 @@ select {
 }
 
 .material-symbols-outlined {
+  font-family: "Material Symbols Outlined";
+  font-style: normal;
+  font-weight: normal;
+  display: inline-block;
   font-variation-settings:
     "FILL" 0,
     "wght" 400,
     "GRAD" 0,
     "opsz" 24;
   line-height: 1;
+  letter-spacing: normal;
+  text-transform: none;
+  white-space: nowrap;
+  word-wrap: normal;
+  direction: ltr;
+  -webkit-font-smoothing: antialiased;
+}
+
+.brand,
+h1,
+h2,
+.font-heading {
+  font-family: var(--font-heading), sans-serif;
+}
+
+.military-grid {
+  background-image: radial-gradient(circle at 1px 1px, rgba(255, 255, 255, 0.05) 1px, transparent 0);
+  background-size: 40px 40px;
 }
 
 ::selection {

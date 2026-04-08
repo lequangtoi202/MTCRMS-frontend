@@ -1,3 +1,6 @@
 export function createUrl(baseUrl: string, path: string) {
-  return new URL(path, baseUrl).toString();
+  const normalizedBaseUrl = baseUrl.endsWith("/") ? baseUrl : `${baseUrl}/`;
+  const normalizedPath = path.replace(/^\/+/, "");
+
+  return new URL(normalizedPath, normalizedBaseUrl).toString();
 }

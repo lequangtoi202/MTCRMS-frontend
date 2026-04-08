@@ -3,6 +3,7 @@
 import { type FormEvent, useEffect, useMemo, useState } from "react";
 
 import { Button } from "@/components/ui/button";
+import { useSessionGuard } from "@/features/auth/hooks/use-session-guard";
 import { ROUTES } from "@/shared/constants/routes";
 import { ApiError } from "@/shared/lib/api/api-error";
 import { cn } from "@/shared/lib/utils/cn";
@@ -277,6 +278,7 @@ function UnitForm({
 }
 
 export function UnitsScreen() {
+  const { isChecking, session } = useSessionGuard();
   const treeQuery = useUnitTree();
   const [selectedUnitId, setSelectedUnitId] = useState<string | null>(null);
   const [expandedIds, setExpandedIds] = useState<Set<string>>(new Set());
@@ -326,6 +328,16 @@ export function UnitsScreen() {
 
       return next;
     });
+  }
+
+  if (isChecking || !session) {
+    return (
+      <main className="flex min-h-screen items-center justify-center bg-[#f7f9ff] px-4">
+        <div className="rounded-3xl border border-[#d6dce8] bg-white px-6 py-5 text-sm font-medium text-[#486176] shadow-sm">
+          Đang kiểm tra quyền truy cập...
+        </div>
+      </main>
+    );
   }
 
   return (
