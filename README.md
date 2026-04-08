@@ -11,6 +11,7 @@ Base frontend setup with Next.js App Router, TypeScript, Tailwind CSS, ESLint, a
 - `npm run build`
 - `docker build --build-arg NEXT_PUBLIC_API_BASE_URL=http://localhost:8080 -t mtcrms-frontend .`
 - `docker run --rm -p 3000:3000 -e NEXT_PUBLIC_API_BASE_URL=http://localhost:8080 mtcrms-frontend`
+- `docker compose up --build`
 
 ## Environment
 
@@ -49,3 +50,16 @@ docker run --rm -p 3000:3000 \
   -e NEXT_PUBLIC_APP_NAME=MTCRMS \
   mtcrms-frontend
 ```
+
+Compose example for local backend on `http://localhost:3000`:
+
+```bash
+docker compose up --build
+```
+
+Default compose values:
+
+- `FRONTEND_PORT=3001`
+- `NEXT_PUBLIC_API_BASE_URL=http://localhost:3000`
+- `NEXT_PUBLIC_API_PREFIX=/api/v1`
+- `NEXT_PUBLIC_APP_NAME=MTCRMS`
