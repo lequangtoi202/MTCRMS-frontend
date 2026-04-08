@@ -1,4 +1,4 @@
-import type { ApiErrorPayload } from "@/shared/types/api";
+import type { ApiErrorPayload, ApiResponseEnvelope } from "@/shared/types/api";
 
 import { ApiError } from "./api-error";
 
@@ -15,6 +15,10 @@ export async function parseApiResponse<T>(response: Response): Promise<T> {
         : `HTTP ${response.status}: ${response.statusText}`;
 
     throw new ApiError(message, response.status, (payload as ApiErrorPayload | null) ?? null);
+  }
+
+  if (payload && typeof payload === "object" && "data" in payload) {
+    return (payload as ApiResponseEnvelope<T>).data;
   }
 
   return payload as T;

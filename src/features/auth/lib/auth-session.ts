@@ -24,10 +24,10 @@ export function createSessionState(payload: LoginResponse): SessionState {
   return {
     accessToken: payload.accessToken,
     refreshToken: payload.refreshToken,
-    mustChangePassword: Boolean(payload.mustChangePassword),
-    expiresAt: payload.expiresIn ? now + payload.expiresIn * 1000 : null,
+    mustChangePassword: payload.user.mustChangePassword,
+    expiresAt: null,
     lastActivityAt: now,
-    user: payload.user ?? null,
+    user: payload.user,
   };
 }
 
@@ -48,6 +48,10 @@ export function readSession() {
     window.localStorage.removeItem(SESSION_STORAGE_KEY);
     return null;
   }
+}
+
+export function getAccessToken() {
+  return readSession()?.accessToken ?? null;
 }
 
 export function writeSession(session: SessionState) {

@@ -4,25 +4,27 @@ export type LoginPayload = {
 };
 
 export type AuthUser = {
-  id?: string;
-  name?: string;
-  role?: string;
-  unitName?: string;
+  id: string;
+  mssq: string;
+  fullName: string;
+  status: string;
+  roleCode: string | null;
+  mustChangePassword: boolean;
+  lastLoginAt: string | null;
 };
 
 export type LoginResponse = {
-  accessToken?: string;
-  refreshToken?: string;
-  expiresIn?: number;
-  mustChangePassword?: boolean;
-  user?: AuthUser;
+  accessToken: string;
+  refreshToken: string;
+  refreshTokenExpiresAt: string;
+  user: AuthUser;
 };
 
 export type SessionState = {
-  accessToken?: string;
-  refreshToken?: string;
+  accessToken: string;
+  refreshToken: string;
   mustChangePassword: boolean;
   expiresAt: number | null;
   lastActivityAt: number;
-  user: AuthUser | null;
+  user: AuthUser;
 };

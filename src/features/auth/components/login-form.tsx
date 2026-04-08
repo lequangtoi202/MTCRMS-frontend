@@ -59,7 +59,7 @@ export function LoginForm() {
 
       writeSession(createSessionState(response));
 
-      const nextRoute = response.mustChangePassword
+      const nextRoute = response.user.mustChangePassword
         ? `${ROUTES.dashboard}?notice=password-reset-required`
         : redirectTo;
 

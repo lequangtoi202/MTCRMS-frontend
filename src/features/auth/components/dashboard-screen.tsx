@@ -53,20 +53,33 @@ export function DashboardScreen() {
           <p className="text-xs font-bold uppercase tracking-[0.22em] text-white/70">MTCRMS Secure Workspace</p>
           <div className="mt-4 flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
             <div>
-              <h1 className="font-heading text-3xl font-extrabold">Xin chào, {session.user?.name || "quân nhân"}</h1>
+              <h1 className="font-heading text-3xl font-extrabold">
+                Xin chào, {session.user.fullName || "quân nhân"}
+              </h1>
               <p className="mt-3 max-w-2xl text-sm leading-7 text-[#d6e3ff]">
                 Bạn đã đăng nhập thành công. Màn hình này đóng vai trò protected entry point để kiểm tra redirect sau
                 xác thực, trạng thái phiên và tự động đăng xuất khi hết hạn.
               </p>
             </div>
-            <Button
-              type="button"
-              variant="secondary"
-              className="h-11 rounded-full bg-white/12 px-5 text-white hover:bg-white/18"
-              onClick={handleLogout}
-            >
-              Đăng xuất
-            </Button>
+            <div className="flex flex-wrap items-center gap-3">
+              <Button
+                as="a"
+                href={ROUTES.units}
+                type="button"
+                variant="secondary"
+                className="h-11 rounded-full bg-white px-5 text-[#00488d] hover:bg-white/88"
+              >
+                Cơ cấu tổ chức
+              </Button>
+              <Button
+                type="button"
+                variant="secondary"
+                className="h-11 rounded-full bg-white/12 px-5 text-white hover:bg-white/18"
+                onClick={handleLogout}
+              >
+                Đăng xuất
+              </Button>
+            </div>
           </div>
         </header>
 
@@ -75,11 +88,11 @@ export function DashboardScreen() {
         <section className="grid gap-4 md:grid-cols-3">
           <article className="rounded-3xl border border-[#c2c6d4]/40 bg-white p-6 shadow-sm">
             <p className="text-xs font-bold uppercase tracking-[0.18em] text-[#727783]">Vai trò</p>
-            <p className="mt-4 text-lg font-semibold text-[#181c20]">{session.user?.role || "Chưa có dữ liệu"}</p>
+            <p className="mt-4 text-lg font-semibold text-[#181c20]">{session.user.roleCode || "Chưa có dữ liệu"}</p>
           </article>
           <article className="rounded-3xl border border-[#c2c6d4]/40 bg-white p-6 shadow-sm">
-            <p className="text-xs font-bold uppercase tracking-[0.18em] text-[#727783]">Đơn vị</p>
-            <p className="mt-4 text-lg font-semibold text-[#181c20]">{session.user?.unitName || "Chưa có dữ liệu"}</p>
+            <p className="text-xs font-bold uppercase tracking-[0.18em] text-[#727783]">Định danh</p>
+            <p className="mt-4 text-lg font-semibold text-[#181c20]">{session.user.mssq}</p>
           </article>
           <article className="rounded-3xl border border-[#c2c6d4]/40 bg-white p-6 shadow-sm">
             <p className="text-xs font-bold uppercase tracking-[0.18em] text-[#727783]">Phiên</p>
